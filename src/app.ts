@@ -1,7 +1,7 @@
 import "./wasm/wasm_exec"
 
 import highlight from "./highlight";
-import {convert, Options} from "./convert";
+import {Options} from "./convert";
 
 const $input = document.getElementById("input");
 const $output = document.getElementById("output");
@@ -11,12 +11,12 @@ const $inline = document.getElementById("inline") as HTMLInputElement;
 const options = new Options($inline.checked);
 
 function doConversion() {
-    const result = convert($input.innerText.trim(), options);
+    const result = globalThis.xmlDataToGoTypeCode($input.innerText.trim(), options);
 
-    if (result.success) {
-        $output.innerHTML = highlight(result.success);
+    if (result !== "") {
+        $output.innerHTML = highlight(result);
     } else {
-        $output.innerHTML = result.error;
+        $output.innerHTML = "";
     }
 }
 

@@ -1,3 +1,5 @@
+import "./wasm/wasm_exec"
+
 import highlight from "./highlight";
 import {convert, Options} from "./convert";
 
@@ -40,3 +42,14 @@ const sample = `<note>
     <heading>Reminder</heading>
     <body>Don't forget me this weekend!</body>
 </note>`;
+
+const xmlToGoWasmURL = "https://xml-to-go.github.io/static/js/wasm/xml-to-go.wasm";
+// const xmlToGoWasmURL = "http://localhost:8080/xml-to-go.wasm";
+
+// Go from ./wasm/wasm_exec
+const go = new globalThis.Go();
+WebAssembly
+    .instantiateStreaming(fetch(xmlToGoWasmURL), go.importObject)
+    .then(function (result) {
+        go.run(result.instance);
+    });

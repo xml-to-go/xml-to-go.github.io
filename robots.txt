@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://xml-to-go.github.io/sitemap.xml

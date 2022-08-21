@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XML-to-Go: Convert XML to Go instantly</title>
+    <link rel="stylesheet" href="static/css/app.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <script id="help-ukraine-win" async="true" src="https://helpukrainewinwidget.org/cdn/widget.js" data-type="one" data-position="top-right"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/default.min.css">
+</head>
+<body>
+    <header>
+        <div class="intro">
+            <div class="title">
+                <h1>XML-to-Go</h1>
+                <h2>Convert XML to Go</h2>
+            </div>
+            <div>
+                <p>
+                    This tool instantly converts XML into a Go. Paste a XML structure on the left and the equivalent Go type will be generated to the right, which you can paste into your program. The script has to make some assumptions, so double-check the output!
+                </p>
+                <p>
+                    For an example, try converting XML from the <a href="javascript:void(0);" id="sample">Sample</a>.
+                </p>
+                <p>
+                    <a href="https://github.com/xml-to-go/xml-to-go.github.io" target="_blank">View on GitHub</a>
+                    &bull; Inspired by <a href="https://mholt.github.io/json-to-go/" target="_blank">JSON-to-Go</a>
+                </p>
+            </div>
+        </div>
+    </header>
+    <table>
+        <tr>
+            <th style="width: 45%;">XML</th>
+            <th style="width: 10%; font-size: 22px;">&#8594;</th>
+            <th style="width: 45%;">Go <label><input type="checkbox" id="inline" checked>Inline definitions</label></th>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width: 50%;">
+                <div id="input" contenteditable></div>
+            </td>
+            <td style="width: 50%;">
+                <div id="output"></div>
+            </td>
+        </tr>
+    </table>
+
+    <footer>&copy; 2022 Yaroslav Podorvanov <svg xmlns="http://www.w3.org/2000/svg" width="15" height="10"><rect width="15" height="10" fill="#005BBB"/><rect width="15" height="5" y="5" fill="#FFD500"/></svg></footer>
+
+    <script src="static/js/app.js"></script>
+    <script src="static/js/infowarship.js"></script>
+</body>
+</html>

@@ -8,11 +8,12 @@ const $output = document.getElementById("output");
 const $sample = document.getElementById("sample");
 const $inline = document.getElementById("inline") as HTMLInputElement;
 const $withJSON = document.getElementById("with-json-tags") as HTMLInputElement;
+const $compact = document.getElementById("compact") as HTMLInputElement;
 
-const options = new Options($inline.checked, $withJSON.checked);
+const options = new Options($inline.checked, $withJSON.checked, $compact.checked);
 
 function doConversion() {
-    const result = globalThis.xmlDataToGoTypeCode($input.innerText.trim(), options.inline, options.withJSON);
+    const result = globalThis.xmlDataToGoTypeCode($input.innerText.trim(), options.inline, options.compact, options.withJSON);
 
     if (result !== "") {
         $output.innerHTML = highlight(result);
@@ -39,6 +40,12 @@ $inline.addEventListener("change", function () {
 
 $withJSON.addEventListener("change", function () {
     options.withJSON = $withJSON.checked;
+
+    doConversion();
+});
+
+$compact.addEventListener("change", function () {
+    options.compact = $compact.checked;
 
     doConversion();
 });

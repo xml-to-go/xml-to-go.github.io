@@ -10,6 +10,7 @@ export class Options {
     constructor(
         public inline: boolean,
         public withJSON: boolean,
+        public compact: boolean,
     ) {
     }
 }

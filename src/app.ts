@@ -7,11 +7,12 @@ const $input = document.getElementById("input");
 const $output = document.getElementById("output");
 const $sample = document.getElementById("sample");
 const $inline = document.getElementById("inline") as HTMLInputElement;
+const $withJSON = document.getElementById("with-json-tags") as HTMLInputElement;
 
-const options = new Options($inline.checked);
+const options = new Options($inline.checked, $withJSON.checked);
 
 function doConversion() {
-    const result = globalThis.xmlDataToGoTypeCode($input.innerText.trim(), options);
+    const result = globalThis.xmlDataToGoTypeCode($input.innerText.trim(), options.inline, options.withJSON);
 
     if (result !== "") {
         $output.innerHTML = highlight(result);
@@ -20,10 +21,24 @@ function doConversion() {
     }
 }
 
+function xmlToGoWasmURL() {
+    if (location.pathname.startsWith("/home/")) {
+        return "http://localhost:8080/xml-to-go.wasm";
+    }
+
+    return "https://xml-to-go.github.io/static/js/wasm/xml-to-go.wasm";
+}
+
 $input.addEventListener("keyup", doConversion);
 
 $inline.addEventListener("change", function () {
     options.inline = $inline.checked;
+
+    doConversion();
+});
+
+$withJSON.addEventListener("change", function () {
+    options.withJSON = $withJSON.checked;
 
     doConversion();
 });
@@ -43,13 +58,10 @@ const sample = `<note>
     <body>Don't forget me this weekend!</body>
 </note>`;
 
-const xmlToGoWasmURL = "https://xml-to-go.github.io/static/js/wasm/xml-to-go.wasm";
-// const xmlToGoWasmURL = "http://localhost:8080/xml-to-go.wasm";
-
 // Go from ./wasm/wasm_exec
 const go = new globalThis.Go();
 WebAssembly
-    .instantiateStreaming(fetch(xmlToGoWasmURL), go.importObject)
+    .instantiateStreaming(fetch(xmlToGoWasmURL()), go.importObject)
     .then(function (result) {
         go.run(result.instance);
     });

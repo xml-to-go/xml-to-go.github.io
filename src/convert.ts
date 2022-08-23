@@ -9,6 +9,7 @@ class Result {
 export class Options {
     constructor(
         public inline: boolean,
+        public withJSON: boolean,
     ) {
     }
 }

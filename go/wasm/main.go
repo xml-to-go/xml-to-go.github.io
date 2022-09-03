@@ -31,14 +31,7 @@ func xmlDataToGoTypeCodeWasmWrapper(this js.Value, args []js.Value) interface{} 
 }
 
 func xmlDataToGoTypeCode(content string, inline, compact, withJSON bool) string {
-	_ = inline // @TODO after https://github.com/miku/zek/issues/14
-
-	var (
-		buffer   = new(bytes.Buffer)
-		rootNode = new(zek.Node)
-		sw       = zek.NewStructWriter(buffer)
-	)
-
+	var rootNode = new(zek.Node)
 	_, err := rootNode.ReadFrom(strings.NewReader(content))
 	if err != nil {
 		fmt.Printf("Cannot read Node from source XML with err: %s\n", err)
@@ -46,12 +39,16 @@ func xmlDataToGoTypeCode(content string, inline, compact, withJSON bool) string 
 		return ""
 	}
 
+	var (
+		buffer = new(bytes.Buffer)
+		sw     = zek.NewStructWriter(buffer)
+	)
 	sw.Banner = fmt.Sprintf(
 		"generated %s by %s in Ukraine.",
 		time.Now().Format("2006-01-02 15:04:05"),
 		"https://xml-to-go.github.io/",
 	)
-
+	_ = inline // @TODO sw.Inline = inline after https://github.com/miku/zek/issues/14
 	sw.Compact = compact
 	sw.WithJSONTags = withJSON
 

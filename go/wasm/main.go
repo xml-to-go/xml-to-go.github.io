@@ -15,22 +15,28 @@ func main() {
 	fmt.Println("Golang WebAssembly main")
 
 	done := make(chan struct{})
-	js.Global().Set("xmlDataToGoTypeCode", js.FuncOf(xmlDataToGoTypeCode))
+	js.Global().Set("xmlDataToGoTypeCode", js.FuncOf(xmlDataToGoTypeCodeWasmWrapper))
 	<-done
 }
 
-func xmlDataToGoTypeCode(this js.Value, args []js.Value) interface{} {
-	var (
-		buffer   = new(bytes.Buffer)
-		rootNode = new(zek.Node)
-		sw       = zek.NewStructWriter(buffer)
-	)
-
+func xmlDataToGoTypeCodeWasmWrapper(this js.Value, args []js.Value) interface{} {
 	var (
 		content  = args[0].String()
 		inline   = args[1].Bool()
 		compact  = args[2].Bool()
 		withJSON = args[3].Bool()
+	)
+
+	return xmlDataToGoTypeCode(content, inline, compact, withJSON)
+}
+
+func xmlDataToGoTypeCode(content string, inline, compact, withJSON bool) string {
+	_ = inline // @TODO after https://github.com/miku/zek/issues/14
+
+	var (
+		buffer   = new(bytes.Buffer)
+		rootNode = new(zek.Node)
+		sw       = zek.NewStructWriter(buffer)
 	)
 
 	_, err := rootNode.ReadFrom(strings.NewReader(content))
@@ -45,7 +51,7 @@ func xmlDataToGoTypeCode(this js.Value, args []js.Value) interface{} {
 		time.Now().Format("2006-01-02 15:04:05"),
 		"https://xml-to-go.github.io/",
 	)
-	_ = inline // @TODO after https://github.com/miku/zek/issues/14
+
 	sw.Compact = compact
 	sw.WithJSONTags = withJSON
 

@@ -1,6 +1,6 @@
 module github.com/xml-to-go/xml-to-go.github.io
 
-go 1.18
+go 1.19
 
 require github.com/miku/zek v0.1.16
 

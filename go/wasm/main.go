@@ -8,8 +8,10 @@ import (
 func main() {
 	fmt.Println("Golang WebAssembly main")
 
-	done := make(chan struct{})
+	// globalThis.xmlDataToGoTypeCode = function () {}
 	js.Global().Set("xmlDataToGoTypeCode", js.FuncOf(xmlDataToGoTypeCodeWasmWrapper))
+
+	done := make(chan struct{})
 	<-done
 }
 

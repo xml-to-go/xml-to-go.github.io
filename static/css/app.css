@@ -28,6 +28,15 @@ header {
     width: 33.333%;
 }
 
+.title {
+    display: flex;
+    flex-direction: column;
+}
+  
+.github-stars {
+    margin-top: auto;
+}
+
 h1 {
     font-size: 34px;
     font-weight: bold;
@@ -43,6 +52,11 @@ p {
     margin-top: 20px;
     line-height: 1.5em;
 }
+
+p:first-child {
+    margin-top: 0;
+}
+  
 
 table {
     width: 100%;
@@ -100,12 +114,69 @@ td {
 
 footer {
     color: #888;
-    text-align: center;
-    padding: 25px 0 50px;
+    padding: 20px 20px 29px;
     line-height: 2em;
 }
 
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.github-links {
+  display: flex;
+  align-items: center;
+}
+
+.suport-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: auto;
+}
+
+.suport-buttons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 0;
+  gap: 8px;
+  width: 220px;
+  border: 1px solid #c6cad2;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 140%;
+  color: #13161b;
+  text-decoration: none;
+  transition: background 0.3s;
+}
+
+.suport-buttons a:hover {
+  background: #f3f5f8;
+}
+
+@media (max-width: 1024px) {
+    .info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .suport-buttons {
+      margin: 0;
+    }
+  
+    .github-links {
+      margin-bottom: 15px;
+    }
+  }
+
 @media (max-width: 800px) {
+    .github-stars {
+        margin: 10px 0;
+    }
+
     .intro {
         flex-direction: column;
     }

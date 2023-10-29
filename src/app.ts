@@ -24,10 +24,10 @@ function doConversion() {
 
 function xmlToGoWasmURL() {
     if (location.pathname.startsWith("/home/")) {
-        return "http://localhost:8080/xml-to-go.wasm";
+        return "http://localhost:8080/xml-to-go.wasm?v1";
     }
 
-    return "https://xml-to-go.github.io/static/js/wasm/xml-to-go.wasm";
+    return "https://xml-to-go.github.io/static/js/wasm/xml-to-go.wasm?v1";
 }
 
 $input.addEventListener("keyup", doConversion);

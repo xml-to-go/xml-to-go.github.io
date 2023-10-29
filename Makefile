@@ -4,7 +4,7 @@ webpack:
 esbuild:
 	npm run esbuild
 
-# go mod edit -go=1.20
+# go mod edit -go=1.21
 wasm:
 	cp "$(shell go env GOROOT)/misc/wasm/wasm_exec.js" ./src/wasm/
 	GOOS=js GOARCH=wasm go build -o ./static/js/wasm/xml-to-go.wasm ./go/wasm/*.go

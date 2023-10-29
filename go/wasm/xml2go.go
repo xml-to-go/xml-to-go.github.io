@@ -12,7 +12,7 @@ import (
 
 func xmlDataToGoTypeCode(content string, inline, compact, withJSON bool) string {
 	var rootNode = new(zek.Node)
-	_, err := rootNode.ReadFrom(strings.NewReader(content))
+	_, err := rootNode.ReadFrom(strings.NewReader(content), &zek.ReadOpts{})
 	if err != nil {
 		fmt.Printf("github.com/miku/zek::Node.ReadFrom cannot decode XML with err: %s\n", err)
 
